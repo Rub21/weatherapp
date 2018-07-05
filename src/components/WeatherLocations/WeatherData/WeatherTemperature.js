@@ -7,7 +7,9 @@ import {
     SUN,
     RAIN,
     SNOW,
-    WINDY
+    WINDY,
+    THUNDER,
+    DRIZZLE
 } from './../../../constants/weathers';
 import './styles.css'
 
@@ -15,17 +17,21 @@ import './styles.css'
 const stateToIconName = weatherState => {
     switch (weatherState) {
         case CLOUD:
-            return CLOUD;
+            return 'address-book';
         case CLOUDY:
-            return CLOUDY;
+            return '500px';
         case SUN:
-            return SUN;
+            return 'blind';
         case RAIN:
-            return RAIN;
+            return 'android';
         case SNOW:
-            return SNOW;
+            return 'arrows-alt';
         case WINDY:
-            return WINDY;
+            return 'arrow-down';
+        case THUNDER:
+            return 'android';
+        case DRIZZLE:
+            return 'drizzle';
         default:
             return 'android';
     }

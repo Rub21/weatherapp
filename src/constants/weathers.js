@@ -4,4 +4,6 @@ export const SUN = 'blind';
 export const RAIN = 'android';
 export const SNOW = 'arrows-alt';
 export const WINDY = 'arrow-down';
+export const THUNDER = 'android';
+export const DRIZZLE = 'drizzle';
 
