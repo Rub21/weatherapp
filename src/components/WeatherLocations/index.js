@@ -16,7 +16,7 @@ const url = 'https://api.openweathermap.org/data/2.5/weather';
 
 class WeatherLocation extends Component {
 
-    constructor({city}) { //Primero se ejecuta aqui., // el city de aqui se utliza destrcturin, y se esta pasando  en el proptypes
+    constructor({ city }) { //Primero se ejecuta aqui., // el city de aqui se utliza destrcturin, y se esta pasando  en el proptypes
         super();
         this.state = {
             city,
@@ -27,16 +27,16 @@ class WeatherLocation extends Component {
 
     componentWillMount() { //este componente se ejecuta una sola ves cuando se inicia al app.
         // console.log('componentWillMount')
-        const {city} = this.state;// el valor city se tomara del state
+        const { city } = this.state;// el valor city se tomara del state
         const api_weather = `${url}?q=${city}&appid=${api_key}`;
         fetch(api_weather)
-        .then(data => {
-            return data.json();
-        }).then(weather_data => {
-            const data = transformWeather(weather_data);
-            this.setState({ data });
-            console.log(weather_data)
-        });
+            .then(data => {
+                return data.json();
+            }).then(weather_data => {
+                const data = transformWeather(weather_data);
+                this.setState({ data });
+                console.log(weather_data)
+            });
         // this.handleUpdateClick();
     }
 
@@ -53,18 +53,22 @@ class WeatherLocation extends Component {
     }
 
     render = () => {
-        console.log('render')
+        // console.log('render')
+        const {onWeatherLocationClick} = this.props;
+
         const { city, data } = this.state;
-        return (<div className='weatherLocationCont'>
-            <Location city={city} />
-            {data ? <WeatherData data={data} />: <CircularProgress/>}
-            {/* <button onClick={this.handleUpdateClick} >Actualizar</button> */}
-        </div>)
+        return (
+            <div className='weatherLocationCont' onClick={onWeatherLocationClick}>
+                <Location city={city} />
+                {data ? <WeatherData data={data} /> : <CircularProgress />}
+                {/* <button onClick={this.handleUpdateClick} >Actualizar</button> */}
+            </div>)
 
     };
 }
 
-WeatherLocation.protoTypes ={
-    city: PropTypes.string
+WeatherLocation.protoTypes = {
+    city: PropTypes.string,
+    onWeatherLocationClick: PropTypes.func
 }
 export default WeatherLocation;
