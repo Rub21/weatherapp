@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Location from './Location';
 import WeatherData from './WeatherData/';
 import transformWeather from './../../services/transformWeather';
@@ -6,37 +7,37 @@ import { withStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import './styles.css';
 
-const location = 'Buenos Aires, ar';
+
+//Constantes
 const api_key = '6650d5325c1a416b32efdde4a39d7295';
-const api_weather = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${api_key}`;
+const url = 'https://api.openweathermap.org/data/2.5/weather';
+// const city = 'Buenos Aires, ar';
 
 
 class WeatherLocation extends Component {
 
-    constructor() { //Primero se ejecuta aqui.
+    constructor({city}) { //Primero se ejecuta aqui., // el city de aqui se utliza destrcturin, y se esta pasando  en el proptypes
         super();
         this.state = {
-            city: 'Buenos Aires',
+            city,
             data: null //valor inicial de data
         };
         console.log('constructor')
-
     }
 
-    handleUpdateClick = () => {
-        console.log('actualizar')
-        fetch(api_weather)
-            .then(data => {
-                return data.json();
-            }).then(weather_data => {
-                const data = transformWeather(weather_data);
-                this.setState({ data });
-                console.log(weather_data)
-            });
-    }
     componentWillMount() { //este componente se ejecuta una sola ves cuando se inicia al app.
         // console.log('componentWillMount')
-        this.handleUpdateClick();
+        const {city} = this.state;// el valor city se tomara del state
+        const api_weather = `${url}?q=${city}&appid=${api_key}`;
+        fetch(api_weather)
+        .then(data => {
+            return data.json();
+        }).then(weather_data => {
+            const data = transformWeather(weather_data);
+            this.setState({ data });
+            console.log(weather_data)
+        });
+        // this.handleUpdateClick();
     }
 
     componentDidMount() { //depues de que se hace el render. este se ejecuta una ves nada ma en la vida del componente
@@ -57,9 +58,13 @@ class WeatherLocation extends Component {
         return (<div className='weatherLocationCont'>
             <Location city={city} />
             {data ? <WeatherData data={data} />: <CircularProgress/>}
-            <button onClick={this.handleUpdateClick} >Actualizar</button>
+            {/* <button onClick={this.handleUpdateClick} >Actualizar</button> */}
         </div>)
 
     };
+}
+
+WeatherLocation.protoTypes ={
+    city: PropTypes.string
 }
 export default WeatherLocation;
