@@ -1,12 +1,15 @@
 .weatherLocationCont{
-    margin: 30px;
-  width: 400px;
-  padding: 15px;
+margin-left: 10px;
+margin-right: 10px;
+width: calc(100%-20px); /* resta o suma la 100%; */
+min-width: 430px;
+  /* width: 400px; */
+  padding: 25px;
+  box-sizing: border-box;
   font-family:  'Roboto', sans-serif;
-  -webkit-box-shadow: 10px 10px 17px -10px rgba(0,0,0,0.75);
--moz-box-shadow: 10px 10px 17px -10px rgba(0,0,0,0.75);
-box-shadow: 10px 10px 17px -10px rgba(0,0,0,0.75);
-background: rgba(240, 236, 236, 0.75)
+
+box-shadow: 10px 10px 42px -12px rgba(0,0,0,0.75);
+/* background: rgba(240, 236, 236, 0.75) */
 }
 
 .locationCont{
