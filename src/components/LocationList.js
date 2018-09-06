@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import WeatherLocation from './WeatherLocations';
 import './style.css'
-
+// container y presetation component, 
+// container only have the loging, presetation contianer has the vizualization
 
 const LocationList = ({ cities, onSelectedLocation }) => {
 

@@ -5,29 +5,17 @@ import Paper from '@material-ui/core/Paper';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import ForecastExtended from './components/ForecastExtended';
-import LocationList from './components/LocationList';
+
+import ForecastExtendedContainer from './containers/ForecastExtendedContainer';
+import LocationListContainer from './containers/LocationListContainer';
+
 import './App.css';
 
 const cities = ['Ayacucho,pe', 'Buenos Aires,ar', 'Lima,pe', 'Bogota,col', 'Madrid,es'];
 
-
 class App extends Component {
 
-  constructor() {
-    super();
-    this.state = { // esta menra de establecer el state es en constructor
-      city: null
-    };
-  }
-
-  handleSelectionLocation = city => {
-    console.log("estableciendo un nuevo valor para city")
-    this.setState({ city: city });
-  }
-
   render() {
-    const { city } = this.state;
     return (
       <Grid fluid>
         <Row>
@@ -43,22 +31,20 @@ class App extends Component {
         </Row>
         <Row>
           <Col xs={12} md={6}>
-            <LocationList cities={cities}
-              onSelectedLocation={this.handleSelectionLocation} >
-            </LocationList>
+            <LocationListContainer cities={cities}>s</LocationListContainer>
           </Col>
           <Col xs={12} md={6}>
             <Paper elevation={5}>
               <div className='detail'>
-                {city? <ForecastExtended city={city}></ForecastExtended>:null}
+               <ForecastExtendedContainer></ForecastExtendedContainer>
               </div>
             </Paper>
           </Col>
         </Row>
       </Grid>
-
     );
   }
 }
-
+// Establecer los PropTypes, para saber que le vamos a pasear por los props
 export default App;
+// - Burbujeo es cuando un componente que manda una accion a su padre para ejecutar otros. o elevar su estado al padre App.js
